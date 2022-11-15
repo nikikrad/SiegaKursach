@@ -35,25 +35,32 @@ class MainFragment: Fragment() {
         mainViewModel.getGameEvents("soccer", "today")
         responseBody.clear()
         mainViewModel.liveData.observe(viewLifecycleOwner) { games ->
-//            var words: ArrayMap<String, String> = ArrayMap(ArrayMap<String(games.games_pre[0].league.name), String(games.games.games_pre[0].id)>)
-//            games.games_pre.forEach { games ->
-//                words.forEach {
-//                    if(it.component1() == games.league.name){
-//
-//                    }
-//                }
-//
-//            }
+
             var shlyapa = games.games_pre.groupBy{
                 it.league.name
             }
-
 
             val adapter = MainAdapter(shlyapa)
             binding.rvEvents.layoutManager =
                 LinearLayoutManager(
                     activity?.applicationContext, LinearLayoutManager.VERTICAL, false)
             binding.rvEvents.adapter = adapter
+
+            binding.spinnerSports.setOnItemClickListener { parent, view, position, id ->
+                Log.e("HUH", id.toString() )
+                Log.e("HUH", position.toString() )
+                Log.e("HUH", view.transitionName )
+//                Log.e("HUH", view.focusable.toString() )
+                Log.e("HUH", parent.transitionName )
+                Log.e("HUH", parent.selectedItemId.toString() )
+                Log.e("HUH", parent.selectedItemPosition.toString() )
+            }
+
+        //        { parent, view, position, id ->
+//
+//
+//
+//            }
         }
     }
 

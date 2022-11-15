@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">SiegaKursach</string>
+    <string-array name="sport_type">
+        <item>Футбол</item>
+        <item>Баскетбол</item>
+        <item>Хоккей</item>
+        <item>Теннис</item>
+        <item>Воллейбол</item>
+        <item>Настольный теннис</item>
+        <item>Гандбол</item>
+        <item>Кибер-Спорт</item>
+    </string-array>
 </resources>

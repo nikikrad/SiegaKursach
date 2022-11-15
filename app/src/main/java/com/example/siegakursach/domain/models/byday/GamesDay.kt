@@ -1,5 +1,8 @@
 package com.example.siegakursach.domain.models.byday
 
+import android.os.Parcelable
+import androidx.navigation.NavType
+
 data class GamesDay(
     val game_id: String,
     val time: String,

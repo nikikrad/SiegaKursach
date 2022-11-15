@@ -13,7 +13,7 @@
             android:id="@+id/tv_LeagueName"
             android:layout_width="wrap_content"
             android:layout_height="49dp"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textColor="@color/black"
             android:gravity="center"
             android:paddingStart="10dp"

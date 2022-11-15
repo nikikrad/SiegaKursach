@@ -1,4 +1,4 @@
-package com.example.ghurskykursach.presentation.main
+package com.example.siegakursach.view.game
 
 import android.os.Build
 import android.os.Bundle
@@ -9,17 +9,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.navigation.NavType
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ghurskykursach.presentation.main.MainAdapter
 import com.example.siegakursach.R
 import com.example.siegakursach.domain.models.byday.GamesDay
+import java.sql.Date
+import java.sql.Timestamp
+import java.time.Instant
+import java.time.ZoneId
 import java.util.ArrayList
 import kotlin.streams.toList
 
-class MainAdapter(
-    private val movieList: Map<String, List<GamesDay>>
-) : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
+class GameAdapter(
+    private val movieList: List<GamesDay>
+) : RecyclerView.Adapter<GameAdapter.MainViewHolder>() {
 
     companion object {
         var megastatus = false
@@ -30,16 +34,12 @@ class MainAdapter(
         viewType: Int
     ): MainViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.item_main, parent, false)
+        val view = layoutInflater.inflate(R.layout.item_game, parent, false)
         return MainViewHolder(view)
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        holder.bind(
-            (movieList.keys.stream()).toList()[position],
-            (movieList.values.stream().toList()[position])
-        )
+        holder.bind(movieList[position])
     }
 
     override fun getItemCount(): Int = movieList.size
@@ -48,16 +48,24 @@ class MainAdapter(
         itemView: View
     ) : RecyclerView.ViewHolder(itemView) {
 
-        private val leagueName: TextView = itemView.findViewById(R.id.tv_LeagueName)
-        private val number: TextView = itemView.findViewById((R.id.tv_Number))
+        private val homeTeam: TextView = itemView.findViewById(R.id.tv_HomeTeam)
+        private val awaiTeam: TextView = itemView.findViewById(R.id.tv_AwaiTeam)
+        private val time: TextView = itemView.findViewById(R.id.tv_Time)
 
         private val bundle = Bundle()
-        fun bind(league: String, item: List<GamesDay>) {
+        fun bind(item: GamesDay) {
             megastatus = false
 
             try {
-                leagueName.text = league.toString()
-                number.text = item.size.toString()
+
+                homeTeam.text = item.home.name
+                awaiTeam.text = item.away.name
+                val timestamp = Instant.ofEpochSecond(item.time.toLong())
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDateTime()
+//                val timestamp = Timestamp(item.time.toLong())
+//                val date = Date(timestamp.time)
+                time.text = timestamp.toString()
 
             } catch (e: Exception) {
                 Log.e("TAG", e.localizedMessage.toString())
