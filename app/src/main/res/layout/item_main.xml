@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="50dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="49dp">
+
+        <TextView
+            android:id="@+id/tv_LeagueName"
+            android:layout_width="wrap_content"
+            android:layout_height="49dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:maxWidth="330dp"
+            android:text="Esoccer Live Arena - 10 мин."/>
+
+        <TextView
+            android:id="@+id/tv_Number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#5120013A"/>
+
+
+</LinearLayout>
