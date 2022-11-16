@@ -46,21 +46,6 @@ class MainFragment: Fragment() {
                     activity?.applicationContext, LinearLayoutManager.VERTICAL, false)
             binding.rvEvents.adapter = adapter
 
-            binding.spinnerSports.setOnItemClickListener { parent, view, position, id ->
-                Log.e("HUH", id.toString() )
-                Log.e("HUH", position.toString() )
-                Log.e("HUH", view.transitionName )
-//                Log.e("HUH", view.focusable.toString() )
-                Log.e("HUH", parent.transitionName )
-                Log.e("HUH", parent.selectedItemId.toString() )
-                Log.e("HUH", parent.selectedItemPosition.toString() )
-            }
-
-        //        { parent, view, position, id ->
-//
-//
-//
-//            }
         }
     }
 

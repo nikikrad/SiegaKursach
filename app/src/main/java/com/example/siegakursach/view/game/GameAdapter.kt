@@ -74,9 +74,9 @@ class GameAdapter(
             itemView.setOnClickListener {
                 if (megastatus == false) {
                     megastatus = true
-                    bundle.putParcelableArrayList("GAMES", item as ArrayList<out Parcelable>)
+                    bundle.putString("MATCHID", item.game_id)
                     Navigation.findNavController(itemView)
-                        .navigate(R.id.action_mainFragment_to_gameFragment, bundle)
+                        .navigate(R.id.action_gameFragment_to_matchFragment, bundle)
                 }
             }
 
