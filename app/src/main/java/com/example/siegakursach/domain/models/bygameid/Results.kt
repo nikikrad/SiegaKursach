@@ -5,6 +5,7 @@ import com.example.siegakursach.domain.models.byday.Home
 import com.example.siegakursach.domain.models.byday.League
 
 data class Results(
+    val id: String,
     val sport_id: String,
     val time: String,
     val time_status: String,

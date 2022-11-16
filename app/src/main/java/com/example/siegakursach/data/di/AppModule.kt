@@ -4,6 +4,10 @@ import com.example.siegakursach.domain.instance.RetrofitInstance
 import com.example.siegakursach.domain.ApiService
 import com.example.siegakursach.view.game.match.MatchViewModel
 import com.example.siegakursach.view.game.match.repository.MatchRepository
+import com.example.siegakursach.view.game.match.tabslayout.h2h.repository.H2HRepository
+import com.example.siegakursach.view.game.match.tabslayout.h2h.H2HViewModel
+import com.example.siegakursach.view.game.match.tabslayout.table.TableViewModel
+import com.example.siegakursach.view.game.match.tabslayout.table.repository.TableRepository
 import com.example.siegakursach.view.main.MainViewModel
 import com.example.siegakursach.view.main.repository.MainRepository
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -19,6 +23,13 @@ val appModule = module {
 
     viewModel{ MatchViewModel(get()) }
 
+    single { H2HRepository(get()) }
+
+    viewModel { H2HViewModel(get()) }
+
+    single { TableRepository(get()) }
+
+    viewModel { TableViewModel(get()) }
 }
 
 val retrofitModule = module{

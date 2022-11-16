@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ghurskykursach.presentation.main.MainAdapter
 import com.example.siegakursach.R
 import com.example.siegakursach.domain.models.byday.GamesDay
+import com.example.siegakursach.test.GameId
 import java.sql.Date
 import java.sql.Timestamp
 import java.time.Instant
@@ -53,6 +54,7 @@ class GameAdapter(
         private val time: TextView = itemView.findViewById(R.id.tv_Time)
 
         private val bundle = Bundle()
+        @RequiresApi(Build.VERSION_CODES.O)
         fun bind(item: GamesDay) {
             megastatus = false
 
@@ -63,9 +65,7 @@ class GameAdapter(
                 val timestamp = Instant.ofEpochSecond(item.time.toLong())
                     .atZone(ZoneId.systemDefault())
                     .toLocalDateTime()
-//                val timestamp = Timestamp(item.time.toLong())
-//                val date = Date(timestamp.time)
-                time.text = timestamp.toString()
+                time.text = "${timestamp.hour}:${timestamp.minute}0"
 
             } catch (e: Exception) {
                 Log.e("TAG", e.localizedMessage.toString())
@@ -75,6 +75,7 @@ class GameAdapter(
                 if (megastatus == false) {
                     megastatus = true
                     bundle.putString("MATCHID", item.game_id)
+                    GameId.leagueId(item.league.id)
                     Navigation.findNavController(itemView)
                         .navigate(R.id.action_gameFragment_to_matchFragment, bundle)
                 }
