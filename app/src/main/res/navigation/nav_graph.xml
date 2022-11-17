@@ -24,4 +24,8 @@
         android:id="@+id/matchFragment"
         android:name="com.example.siegakursach.view.game.match.MatchFragment"
         android:label="MatchFragment" />
+    <fragment
+        android:id="@+id/liveFragment"
+        android:name="com.example.siegakursach.view.live.LiveFragment"
+        android:label="LiveFragment" />
 </navigation>

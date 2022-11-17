@@ -9,6 +9,7 @@ import com.example.siegakursach.domain.models.bygameid.MatchResult
 import com.example.siegakursach.view.game.match.tabslayout.coefficient.models.Coefficient
 import com.example.siegakursach.view.game.match.tabslayout.h2h.model.H2H
 import com.example.siegakursach.view.game.match.tabslayout.table.models.TableResponse
+import com.example.siegakursach.view.live.models.Live
 
 
 interface ApiService {
@@ -43,5 +44,10 @@ interface ApiService {
     suspend fun getCoefficientsById(
         @Query("game_id") id: String
     ): Response<Coefficient>
+
+    @GET("get.php?login=moiseenko&token=50103-7LWGEW20mZ2sDAN&task=livedata&sport=soccer")
+    suspend fun getLiveMatches(
+//        @Query("game_id") id: String
+    ): Response<Live>
 
 }

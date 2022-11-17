@@ -6,7 +6,7 @@
         android:iconTint="@color/black"
         android:title="Главная" />
     <item
-        android:id="@+id/settingFragment"
+        android:id="@+id/liveFragment"
         android:icon="@drawable/ic_live2"
         android:iconTint="@color/black"
         android:title="Live" />

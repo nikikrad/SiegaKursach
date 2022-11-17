@@ -19,16 +19,9 @@ class MyFragmentAdapter(
         if (position == 0) {
             return InfoFragment()
         } else if (position == 1) {
-//            return CoefficientFragment()
             return H2HFragment()
         } else
-//            if(position == 2) {
-//            return H2HFragment()
             return TableFragment()
-//        }else
-//            return TableFragment()
-//    }
-
     }
 
     override fun getItemCount(): Int {

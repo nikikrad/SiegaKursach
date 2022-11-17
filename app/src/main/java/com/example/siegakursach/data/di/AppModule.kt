@@ -10,6 +10,8 @@ import com.example.siegakursach.view.game.match.tabslayout.h2h.repository.H2HRep
 import com.example.siegakursach.view.game.match.tabslayout.h2h.H2HViewModel
 import com.example.siegakursach.view.game.match.tabslayout.table.TableViewModel
 import com.example.siegakursach.view.game.match.tabslayout.table.repository.TableRepository
+import com.example.siegakursach.view.live.LiveViewModel
+import com.example.siegakursach.view.live.repository.LiveRepository
 import com.example.siegakursach.view.main.MainViewModel
 import com.example.siegakursach.view.main.repository.MainRepository
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -36,6 +38,10 @@ val appModule = module {
     single { CoefficientRepository(get()) }
 
     viewModel { CoefficientViewModel(get()) }
+
+    single{ LiveRepository(get()) }
+
+    viewModel { LiveViewModel(get()) }
 }
 
 val retrofitModule = module{
