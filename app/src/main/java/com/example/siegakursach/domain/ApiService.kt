@@ -6,6 +6,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 import com.example.siegakursach.domain.models.bygameid.MatchResult
+import com.example.siegakursach.view.game.match.tabslayout.coefficient.models.Coefficient
 import com.example.siegakursach.view.game.match.tabslayout.h2h.model.H2H
 import com.example.siegakursach.view.game.match.tabslayout.table.models.TableResponse
 
@@ -37,5 +38,10 @@ interface ApiService {
     suspend fun getTableByLeague(
         @Query("league") id: String
     ): Response<TableResponse>
+
+    @GET("get.php?login=moiseenko&token=50103-7LWGEW20mZ2sDAN&task=odds")
+    suspend fun getCoefficientsById(
+        @Query("game_id") id: String
+    ): Response<Coefficient>
 
 }

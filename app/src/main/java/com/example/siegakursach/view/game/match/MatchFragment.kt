@@ -94,6 +94,7 @@ class MatchFragment : Fragment() {
             tabStrip.getChildAt(i).setOnLongClickListener {
                 true
             }
+//            tabStrip.getChildAt(i).isSelected = false
         }
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
@@ -107,6 +108,11 @@ class MatchFragment : Fragment() {
             }
 
         })
+
+//        (binding.tabLayout.getChildAt(0) as ViewGroup).getChildAt(0).isEnabled = false
+
+//        binding.tabLayout.getTabAt(2)?.isSelected ?:
+
         binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
                 binding.tabLayout.selectTab(binding.tabLayout.getTabAt(position))

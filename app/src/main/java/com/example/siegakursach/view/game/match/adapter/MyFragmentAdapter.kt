@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.siegakursach.view.game.match.tabslayout.h2h.H2HFragment
+import com.example.siegakursach.view.game.match.tabslayout.info.InfoFragment
 import com.example.siegakursach.view.game.match.tabslayout.kaf.CoefficientFragment
 import com.example.siegakursach.view.game.match.tabslayout.table.TableFragment
 
@@ -16,12 +17,17 @@ class MyFragmentAdapter(
 
     override fun createFragment(position: Int): Fragment {
         if (position == 0) {
-            return CoefficientFragment()
-        }
-        else if(position == 1){
+            return InfoFragment()
+        } else if (position == 1) {
+//            return CoefficientFragment()
             return H2HFragment()
-        }else
+        } else
+//            if(position == 2) {
+//            return H2HFragment()
             return TableFragment()
+//        }else
+//            return TableFragment()
+//    }
 
     }
 

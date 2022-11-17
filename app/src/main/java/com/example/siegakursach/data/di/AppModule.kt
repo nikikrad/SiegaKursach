@@ -4,6 +4,8 @@ import com.example.siegakursach.domain.instance.RetrofitInstance
 import com.example.siegakursach.domain.ApiService
 import com.example.siegakursach.view.game.match.MatchViewModel
 import com.example.siegakursach.view.game.match.repository.MatchRepository
+import com.example.siegakursach.view.game.match.tabslayout.coefficient.CoefficientViewModel
+import com.example.siegakursach.view.game.match.tabslayout.coefficient.repository.CoefficientRepository
 import com.example.siegakursach.view.game.match.tabslayout.h2h.repository.H2HRepository
 import com.example.siegakursach.view.game.match.tabslayout.h2h.H2HViewModel
 import com.example.siegakursach.view.game.match.tabslayout.table.TableViewModel
@@ -30,6 +32,10 @@ val appModule = module {
     single { TableRepository(get()) }
 
     viewModel { TableViewModel(get()) }
+
+    single { CoefficientRepository(get()) }
+
+    viewModel { CoefficientViewModel(get()) }
 }
 
 val retrofitModule = module{

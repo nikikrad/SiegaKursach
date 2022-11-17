@@ -7,9 +7,51 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Coefficient"
+        app:layout_constraintBottom_toTopOf="@+id/ll_Main"
+        app:layout_constraintEnd_toEndOf="@+id/ll_Main"
+        app:layout_constraintStart_toStartOf="@+id/ll_Main"
+        android:text="Bet365"
+        android:textColor="@color/main"
         android:textSize="30dp"
+        android:layout_marginBottom="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/ll_Main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back_for_coefficient"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_HomeOdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2.79"
+            android:textColor="@color/main"
+            android:textSize="25sp"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_DrawOdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/main"
+            android:textSize="25sp"
+            android:text="4.55"/>
+
+        <TextView
+            android:id="@+id/tv_AwayOdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/main"
+            android:textSize="25sp"
+            android:text="1.99"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
