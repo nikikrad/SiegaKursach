@@ -11,5 +11,6 @@ data class Results(
     val time_status: String,
     val league: League,
     val home: Home,
-    val away: Away
+    val away: Away,
+    val ss: String
 )

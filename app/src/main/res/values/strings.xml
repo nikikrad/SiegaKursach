@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SiegaKursach</string>
+    <string name="app_name">СерегинScore</string>
     <string-array name="sport_type">
         <item>Футбол</item>
         <item>Баскетбол</item>

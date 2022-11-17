@@ -1,12 +1,12 @@
-package com.example.siegakursach.test
+package com.example.siegakursach.single
 
-object GameId {
+object GameData {
     lateinit var gameId: String
     fun gameId(gameId: String){
-        this.gameId = gameId
+        GameId.gameId = gameId
     }
     lateinit var leagueId: String
     fun leagueId(leagueId: String){
-        this.leagueId = leagueId
+        GameId.leagueId = leagueId
     }
 }

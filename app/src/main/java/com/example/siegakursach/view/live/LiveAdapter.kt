@@ -2,19 +2,24 @@ package com.example.siegakursach.view.live
 
 import android.os.Build
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ghurskykursach.presentation.main.MainAdapter
 import com.example.siegakursach.R
+import com.example.siegakursach.single.GameData
 import com.example.siegakursach.view.game.match.tabslayout.h2h.H2HAdapter
 import com.example.siegakursach.view.game.match.tabslayout.h2h.model.H2HData
 import com.example.siegakursach.view.live.models.Live
 import com.example.siegakursach.view.live.models.LiveGames
 import java.time.Instant
 import java.time.ZoneId
+import java.util.ArrayList
 
 class LiveAdapter(
     private val h2hList: List<LiveGames>
@@ -63,11 +68,18 @@ class LiveAdapter(
             try {
                 homeScore.text = item.score.toCharArray()[0].toString()
                 awayScore.text = item.score.toCharArray()[2].toString()
-            }catch (e:Exception){
+            } catch (e: Exception) {
 
             }
+            itemView.setOnClickListener {
 
+                bundle.putInt("STATUS", 1)
+                GameData.gameId = item.game_id
+                GameData.leagueId = item.league.id
+                Navigation.findNavController(itemView)
+                    .navigate(R.id.matchFragment, bundle)
 
+            }
         }
     }
 }

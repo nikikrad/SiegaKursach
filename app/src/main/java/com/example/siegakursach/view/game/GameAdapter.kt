@@ -2,7 +2,6 @@ package com.example.siegakursach.view.game
 
 import android.os.Build
 import android.os.Bundle
-import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,16 +10,11 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ghurskykursach.presentation.main.MainAdapter
 import com.example.siegakursach.R
 import com.example.siegakursach.domain.models.byday.GamesDay
-import com.example.siegakursach.test.GameId
-import java.sql.Date
-import java.sql.Timestamp
+import com.example.siegakursach.single.GameId
 import java.time.Instant
 import java.time.ZoneId
-import java.util.ArrayList
-import kotlin.streams.toList
 
 class GameAdapter(
     private val movieList: List<GamesDay>
@@ -74,8 +68,9 @@ class GameAdapter(
             itemView.setOnClickListener {
                 if (megastatus == false) {
                     megastatus = true
-                    bundle.putString("MATCHID", item.game_id)
+                    bundle.putInt("STATUS", 0)
                     GameId.leagueId(item.league.id)
+                    GameId.gameId(item.game_id)
                     Navigation.findNavController(itemView)
                         .navigate(R.id.action_gameFragment_to_matchFragment, bundle)
                 }

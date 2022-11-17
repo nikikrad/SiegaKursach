@@ -1,15 +1,12 @@
 package com.example.siegakursach.view.live
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.siegakursach.databinding.FragmentLiveBinding
-import com.example.siegakursach.test.GameId
-import com.example.siegakursach.view.game.match.tabslayout.h2h.H2HAdapter
 import org.koin.android.ext.android.inject
 
 class LiveFragment: Fragment() {

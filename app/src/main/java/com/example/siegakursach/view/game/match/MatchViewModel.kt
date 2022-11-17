@@ -12,16 +12,30 @@ import com.example.siegakursach.domain.models.bygameid.MatchResult
 
 class MatchViewModel(private val matchRepository: MatchRepository): ViewModel() {
 
-    val liveData: MutableLiveData<MatchResult> = MutableLiveData()
+    val match: MutableLiveData<MatchResult> = MutableLiveData()
 
     fun getMatch(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try{
-                liveData.postValue(matchRepository.getMatch(id))
+                match.postValue(matchRepository.getMatch(id))
             }catch (e:Exception){
                 Log.e("Error: ", e.toString())
             }
         }
     }
+
+    val live: MutableLiveData<MatchResult> = MutableLiveData()
+
+    fun getLive(id: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try{
+                match.postValue(matchRepository.getMatch(id))
+            }catch (e:Exception){
+                Log.e("Error: ", e.toString())
+            }
+        }
+    }
+
+
 
 }
