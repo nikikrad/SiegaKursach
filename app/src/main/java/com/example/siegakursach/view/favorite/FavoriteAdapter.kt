@@ -13,6 +13,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.siegakursach.R
 import com.example.siegakursach.domain.models.byday.GamesDay
+import com.example.siegakursach.single.GameData
 import com.example.siegakursach.single.GameId
 import com.example.siegakursach.view.favorite.auth.model.GameRequest
 import com.example.siegakursach.view.game.GameAdapter
@@ -49,7 +50,7 @@ class FavoriteAdapter(
         private val homeTeam: TextView = itemView.findViewById(R.id.tv_HomeTeam)
         private val awaiTeam: TextView = itemView.findViewById(R.id.tv_AwaiTeam)
         private val time: TextView = itemView.findViewById(R.id.tv_Time)
-        private val favorite: ImageView = itemView.findViewById(R.id.btn_Favorite)
+//        private val favorite: ImageView = itemView.findViewById(R.id.btn_Favorite)
 
         private val bundle = Bundle()
 
@@ -59,12 +60,17 @@ class FavoriteAdapter(
 
             try {
 
-                homeTeam.text = item.game_id
+                homeTeam.text = item.home
                 awaiTeam.text = item.away
                 val timestamp = Instant.ofEpochSecond(item.time.toLong())
                     .atZone(ZoneId.systemDefault())
                     .toLocalDateTime()
-                time.text = "${timestamp.hour}:${timestamp.minute}0"
+
+                if (timestamp.minute.toString().length == 1){
+                    time.text = "${timestamp.hour}:${timestamp.minute}0"
+                }else
+                    time.text = "${timestamp.hour}:${timestamp.minute}"
+
 
             } catch (e: Exception) {
                 Log.e("TAG", e.localizedMessage.toString())
@@ -73,11 +79,11 @@ class FavoriteAdapter(
             itemView.setOnClickListener {
                 if (megastatus == false) {
                     megastatus = true
-                    bundle.putInt("STATUS", 0)
+//                    bundle.putInt("STATUS", 0)
 //                    GameId.leagueId(item.league.id)
-                    GameId.gameId(item.game_id)
+                    GameData.gameId(item.game_id)
                     Navigation.findNavController(itemView)
-                        .navigate(R.id.action_favoriteFragment_to_matchFragment, bundle)
+                        .navigate(R.id.action_favoriteFragment_to_favoriteMatchFragment, bundle)
                 }
             }
 

@@ -71,9 +71,9 @@ class FavoriteFragment: Fragment() {
                 animeId.children.forEach { aboutAnime ->
                     movieList.add(
                         GameRequest(
-                            aboutAnime.child("away").value.toString(),
                             aboutAnime.child("game_id").value.toString(),
                             aboutAnime.child("home").value.toString(),
+                            aboutAnime.child("away").value.toString(),
                             aboutAnime.child("time").value.toString()
                         )
                     )

@@ -1,4 +1,4 @@
-package com.example.siegakursach.view.game.match
+package com.example.siegakursach.view.game.favorite_match
 
 import android.os.Build
 import android.os.Bundle
@@ -14,29 +14,26 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.siegakursach.R
 import com.example.siegakursach.databinding.FragmentMatchBinding
-import com.example.siegakursach.single.GameData
-import org.koin.android.ext.android.inject
 import com.example.siegakursach.single.GameId
 import com.example.siegakursach.single.SportType
-import com.example.siegakursach.single.Status
 import com.example.siegakursach.view.favorite.auth.model.GameRequest
+import com.example.siegakursach.view.game.match.MatchViewModel
 import com.example.siegakursach.view.game.match.adapter.MyFragmentAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import org.koin.android.ext.android.inject
 import java.time.Instant
 import java.time.ZoneId
+import com.example.siegakursach.databinding.FragmentFavoriteMatchBinding
+import com.example.siegakursach.single.GameData
+import com.example.siegakursach.single.Status
 
+class FavoriteMatchFragment : Fragment() {
 
-class MatchFragment : Fragment() {
-
-    private lateinit var binding: FragmentMatchBinding
+    private lateinit var binding: FragmentFavoriteMatchBinding
     private val matchViewModel: MatchViewModel by inject()
     private lateinit var myFragmentAdapter: MyFragmentAdapter
     lateinit var auth: FirebaseAuth
@@ -48,13 +45,13 @@ class MatchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentMatchBinding.inflate(inflater, container, false)
+        binding = FragmentFavoriteMatchBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onStart() {
         super.onStart()
-        Status.status = "0"
+        Status.status = "1"
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -69,7 +66,7 @@ class MatchFragment : Fragment() {
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
         }
-        matchViewModel.getMatch(GameId.gameId)
+        matchViewModel.getMatch(GameData.gameId)
 
 //        responseBody.clear()
         matchViewModel.match.observe(viewLifecycleOwner) { match ->

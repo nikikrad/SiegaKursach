@@ -44,8 +44,8 @@
             android:id="@+id/action_favoriteFragment2_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_favoriteFragment_to_matchFragment"
-            app:destination="@id/matchFragment" />
+            android:id="@+id/action_favoriteFragment_to_favoriteMatchFragment"
+            app:destination="@id/favoriteMatchFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -59,4 +59,8 @@
         android:id="@+id/registrationFragment"
         android:name="com.example.siegakursach.view.favorite.auth.RegistrationFragment"
         android:label="RegistrationFragment" />
+    <fragment
+        android:id="@+id/favoriteMatchFragment"
+        android:name="com.example.siegakursach.view.game.favorite_match.FavoriteMatchFragment"
+        android:label="FavoriteMatchFragment" />
 </navigation>

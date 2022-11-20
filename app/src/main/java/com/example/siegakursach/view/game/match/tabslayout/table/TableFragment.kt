@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.siegakursach.databinding.FragmentTableBinding
 import com.example.siegakursach.single.GameData
 import com.example.siegakursach.single.GameId
+import com.example.siegakursach.single.Status
 import org.koin.android.ext.android.inject
 
 class TableFragment : Fragment() {
@@ -26,8 +27,15 @@ class TableFragment : Fragment() {
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        if(Status.status.toInt() == 0){
+            tableViewModel.getMatch(GameId.gameId)
+        }else
+            tableViewModel.getMatch(GameData.gameId)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        tableViewModel.getMatch(GameId.leagueId)
 
         binding.tvTable.isVisible = false
         tableViewModel.liveData.observe(viewLifecycleOwner) { match ->
