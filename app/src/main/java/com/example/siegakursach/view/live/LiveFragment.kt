@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.siegakursach.databinding.FragmentLiveBinding
+import com.example.siegakursach.single.SportType
 import org.koin.android.ext.android.inject
 
 class LiveFragment: Fragment() {
@@ -24,7 +25,7 @@ class LiveFragment: Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        liveViewModel.getMatch()
+        liveViewModel.getMatch(SportType.getSport())
 //        responseBody.clear()
         liveViewModel.liveData.observe(viewLifecycleOwner) { match ->
 //            Log.e("HUH", match.results.h2h.toString() )

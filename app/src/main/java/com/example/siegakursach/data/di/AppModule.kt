@@ -11,6 +11,7 @@ import com.example.siegakursach.view.game.match.tabslayout.h2h.H2HViewModel
 import com.example.siegakursach.view.game.match.tabslayout.table.TableViewModel
 import com.example.siegakursach.view.game.match.tabslayout.table.repository.TableRepository
 import com.example.siegakursach.view.live.LiveViewModel
+import com.example.siegakursach.view.live.match.LiveMatchViewModel
 import com.example.siegakursach.view.live.repository.LiveRepository
 import com.example.siegakursach.view.main.MainViewModel
 import com.example.siegakursach.view.main.repository.MainRepository
@@ -42,6 +43,8 @@ val appModule = module {
     single{ LiveRepository(get()) }
 
     viewModel { LiveViewModel(get()) }
+
+    viewModel { LiveMatchViewModel(get()) }
 }
 
 val retrofitModule = module{

@@ -45,9 +45,9 @@ interface ApiService {
         @Query("game_id") id: String
     ): Response<Coefficient>
 
-    @GET("get.php?login=moiseenko&token=50103-7LWGEW20mZ2sDAN&task=livedata&sport=soccer")
+    @GET("get.php?login=moiseenko&token=50103-7LWGEW20mZ2sDAN&task=livedata")
     suspend fun getLiveMatches(
-//        @Query("game_id") id: String
+        @Query("sport") id: String
     ): Response<Live>
 
 }

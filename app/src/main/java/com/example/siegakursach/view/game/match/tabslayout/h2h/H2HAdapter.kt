@@ -62,7 +62,15 @@ class H2HAdapter(
             val timestamp = Instant.ofEpochSecond(item.time.toLong())
                 .atZone(ZoneId.systemDefault())
                 .toLocalDateTime()
-            time.text = "${timestamp.dayOfMonth}.${timestamp.monthValue}"
+            if (timestamp.dayOfMonth.toString().length == 1 && timestamp.monthValue.toString().length == 1){
+                time.text = "0${timestamp.dayOfMonth}.0${timestamp.monthValue}"
+            }else if (timestamp.dayOfMonth.toString().length == 1 && timestamp.monthValue.toString().length == 2){
+                time.text = "0${timestamp.dayOfMonth}.${timestamp.monthValue}"
+            }else if (timestamp.dayOfMonth.toString().length == 2 && timestamp.monthValue.toString().length == 1){
+                time.text = "${timestamp.dayOfMonth}.0${timestamp.monthValue}"
+            }else
+                time.text = "${timestamp.dayOfMonth}.${timestamp.monthValue}"
+
             homeScore.text = item.ss.toCharArray()[0].toString()
             awayScore.text = item.ss.toCharArray()[2].toString()
 

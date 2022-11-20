@@ -15,10 +15,10 @@ class LiveViewModel(private val liveRepository: LiveRepository): ViewModel() {
 
     val liveData: MutableLiveData<Live> = MutableLiveData()
 
-    fun getMatch() {
+    fun getMatch(sport:String) {
         viewModelScope.launch(Dispatchers.IO) {
             try{
-                liveData.postValue(liveRepository.getLiveMatches())
+                liveData.postValue(liveRepository.getLiveMatches(sport))
             }catch (e:Exception){
                 Log.e("Error: ", e.toString())
             }

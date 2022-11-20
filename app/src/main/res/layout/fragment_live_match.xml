@@ -12,15 +12,6 @@
         android:layout_height="wrap_content"/>
 
     <ImageView
-        android:id="@+id/btn_Favorite"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_white_unfav"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="10dp"/>
-
-    <ImageView
         android:id="@+id/btn_Back"
         android:layout_width="30dp"
         android:layout_height="30dp"

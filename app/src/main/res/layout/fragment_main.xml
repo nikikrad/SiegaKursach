@@ -19,13 +19,17 @@
             android:background="#20013A"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spinner_Date"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"/>
-<!--            android:background="@drawable/style_spinner"-->
-<!--            />-->
+       <TextView
+           android:id="@+id/tv_Date"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Сегодня"
+           android:layout_gravity="center"
+           android:textSize="20sp"
+           android:textColor="@color/black"
+           android:textStyle="bold"
+           android:padding="15dp"
+           android:background="@drawable/back_for_btn_dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_Events"
@@ -48,14 +52,10 @@
         android:id="@+id/spinner_Sports"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:entries="@array/sport_type"
-        android:outlineSpotShadowColor="@color/white"
-        android:outlineAmbientShadowColor="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_StaticImage"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/white"
+        android:layout_marginTop="5dp"
         android:textSize="25dp"/>
 
 

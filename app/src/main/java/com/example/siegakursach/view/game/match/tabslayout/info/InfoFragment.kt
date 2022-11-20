@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.siegakursach.databinding.FragmentCoefficientBinding
 import com.example.siegakursach.single.GameData
@@ -37,7 +38,10 @@ class InfoFragment : Fragment() {
                 binding.tvDrawOdd.text = match.odds.Bet365.prematch[0].draw_od
                 binding.tvAwayOdd.text = match.odds.Bet365.prematch[0].away_od
             } catch (e: Exception) {
-                binding.tvDrawOdd.text = "Данные отсутствуют"
+                binding.tvDrawOdd.isVisible = false
+                binding.tvAwayOdd.isVisible = false
+                binding.tvHomeOdd.isVisible = false
+                binding.tvDataLabel.isVisible = true
             }
 
 

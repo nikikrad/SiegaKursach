@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "24864810179",
+    "project_id": "siega-72b2c",
+    "storage_bucket": "siega-72b2c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:24864810179:android:724e581043840f7b84ae76",
+        "android_client_info": {
+          "package_name": "com.example.siegakursach"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "24864810179-o2lmfkl7fgfqpk1oc1a6hvc766rmm8hv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH9KcVxx7FTB068jDDZ_VvqQc0Z3ksAlU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "24864810179-o2lmfkl7fgfqpk1oc1a6hvc766rmm8hv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

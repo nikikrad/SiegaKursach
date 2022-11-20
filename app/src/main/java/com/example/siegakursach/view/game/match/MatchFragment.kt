@@ -2,6 +2,7 @@ package com.example.siegakursach.view.game.match
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +17,18 @@ import com.example.siegakursach.databinding.FragmentMatchBinding
 import com.example.siegakursach.single.GameData
 import org.koin.android.ext.android.inject
 import com.example.siegakursach.single.GameId
+import com.example.siegakursach.single.SportType
+import com.example.siegakursach.view.favorite.auth.model.GameRequest
 import com.example.siegakursach.view.game.match.adapter.MyFragmentAdapter
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.time.Instant
 import java.time.ZoneId
 
@@ -27,6 +38,9 @@ class MatchFragment : Fragment() {
     private lateinit var binding: FragmentMatchBinding
     private val matchViewModel: MatchViewModel by inject()
     private lateinit var myFragmentAdapter: MyFragmentAdapter
+    lateinit var auth: FirebaseAuth
+    lateinit var database: DatabaseReference
+    var megaStatus = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +54,9 @@ class MatchFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val id = arguments?.getInt("STATUS")
+
+        auth = FirebaseAuth.getInstance()
+        database = Firebase.database.reference
 
 
 
@@ -60,12 +77,18 @@ class MatchFragment : Fragment() {
                 .atZone(ZoneId.systemDefault())
                 .toLocalDateTime()
 
-            binding.tvDate.text =
-                "${timestamp.dayOfMonth}.${timestamp.monthValue}.${timestamp.year} ${timestamp.hour}:${timestamp.minute}0 "
-            GameId.gameId = match.results[0].id
+            if(timestamp.minute.toString().length == 1){
+                binding.tvDate.text =
+                    "${timestamp.dayOfMonth}.${timestamp.monthValue}.${timestamp.year} ${timestamp.hour}:${timestamp.minute}0"
+            }else
+                binding.tvDate.text =
+                    "${timestamp.dayOfMonth}.${timestamp.monthValue}.${timestamp.year} ${timestamp.hour}:${timestamp.minute}"
+
+
+//            GameId.gameId = match.results[0].id
             try {
                 Glide.with(binding.root)
-                    .load("https://spoyer.ru/api/team_img/soccer/${match.results[0].home.image_id}.png")
+                    .load("https://spoyer.ru/api/team_img/${SportType.getSport()}/${match.results[0].home.image_id}.png")
                     .placeholder(R.drawable.ic_search)
                     .into(binding.ivHomeTeam)
             } catch (e: Exception) {
@@ -73,7 +96,7 @@ class MatchFragment : Fragment() {
 
             try {
                 Glide.with(binding.root)
-                    .load("https://spoyer.ru/api/team_img/soccer/${match.results[0].away.image_id}.png")
+                    .load("https://spoyer.ru/api/team_img/${SportType.getSport()}/${match.results[0].away.image_id}.png")
                     .placeholder(R.drawable.ic_search)
                     .into(binding.ivAwayTeam)
             } catch (e: Exception) {
@@ -83,6 +106,51 @@ class MatchFragment : Fragment() {
                 binding.tvScore.text = match.results[0].ss
 
             } catch (e: Exception) {
+            }
+
+
+            matchViewModel.processingData(match.results[0].id)
+
+            matchViewModel.status.observe(viewLifecycleOwner) {bool ->
+                if (bool){
+                    binding.btnFavorite.setImageResource(R.drawable.ic_white_fav)
+                }else{
+                    binding.btnFavorite.setImageResource(R.drawable.ic_white_unfav)
+                }
+                binding.btnFavorite.setOnClickListener {
+                    if (auth.currentUser != null) {
+                        if (!bool) {
+                            database.child(
+                                auth.currentUser?.email.toString().substringBefore("@")
+                            )
+                                .child(match.results[0].id).setValue(
+                                    GameRequest(
+                                        match.results[0].id,
+                                        match.results[0].home.name,
+                                        match.results[0].away.name,
+                                        match.results[0].time
+                                    )
+                                ).addOnSuccessListener {
+                                    binding.btnFavorite.setImageResource(R.drawable.ic_white_fav)
+                                }.addOnFailureListener {
+                                    Log.e("HUH", it.localizedMessage)
+                                }
+                        } else {
+                            database.child(
+                                auth.currentUser?.email.toString().substringBefore("@")
+                            ).get()
+                                .addOnSuccessListener {
+                                    it.child(match.results[0].id).ref.removeValue()
+                                        .addOnSuccessListener {
+                                            binding.btnFavorite.setImageResource(R.drawable.ic_white_unfav)
+                                        }
+                                }
+                        }
+
+                    } else {
+//                        Toast.makeText(context, "Войдите в аккаунт!", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
 
         }
@@ -96,7 +164,6 @@ class MatchFragment : Fragment() {
             tabStrip.getChildAt(i).setOnLongClickListener {
                 true
             }
-//            tabStrip.getChildAt(i).isSelected = false
         }
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -118,6 +185,6 @@ class MatchFragment : Fragment() {
             }
         })
 
-    }
 
+    }
 }

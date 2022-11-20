@@ -1,4 +1,4 @@
-package com.example.ghurskykursach.presentation.main
+package com.example.siegakursach.view.main
 
 import android.os.Build
 import android.os.Bundle
@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.navigation.NavType
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.siegakursach.R

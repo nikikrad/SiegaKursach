@@ -15,6 +15,7 @@
         android:textSize="30dp"
         android:layout_marginBottom="20dp"/>
 
+
     <LinearLayout
         android:id="@+id/ll_Main"
         android:layout_width="wrap_content"
@@ -53,5 +54,18 @@
             android:text="1.99"/>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_DataLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Данные отсутствуют!"
+        android:visibility="invisible"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

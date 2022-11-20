@@ -17,6 +17,7 @@ class MainViewModel(private val mainRepository: MainRepository): ViewModel() {
     fun getGameEvents(sport: String, day:String) {
         viewModelScope.launch(Dispatchers.IO) {
             try{
+
                 liveData.postValue(mainRepository.getEvents(sport, day))
             }catch (e:Exception){
                 Log.e("Error: ", e.toString())

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ghurskykursach.presentation.main.MainAdapter
 import com.example.siegakursach.databinding.FragmentGameBinding
 import com.example.siegakursach.domain.models.byday.GamesDay
 
