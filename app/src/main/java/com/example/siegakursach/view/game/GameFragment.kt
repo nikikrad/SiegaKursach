@@ -34,7 +34,7 @@ class GameFragment: Fragment() {
         if (TaskType.task == "predata"){
             gameList = arguments?.getParcelableArrayList<Parcelable>("GAMES") as List<GamesDay>
 
-            binding.tvLeagueName.text = gameList[0].league.name
+            binding.tvLeagueName.text = gameList[0].league!!.name
 
             val adapter = GameAdapter(gameList)
             binding.rvGame.layoutManager =
@@ -45,7 +45,7 @@ class GameFragment: Fragment() {
             endGameList = arguments?.getParcelableArrayList<Parcelable>("GAMES") as List<GamesEnd>
 
             try{
-                binding.tvLeagueName.text = endGameList[0].league.name
+                binding.tvLeagueName.text = endGameList[0].league?.name
             }catch (e: Exception){}
 
             val adapter = EndGamesAdapter(endGameList)

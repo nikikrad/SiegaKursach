@@ -8,8 +8,16 @@ data class GamesEnd(
     val game_id: String,
     val time: String,
     val time_status: String,
-    val league: League,
-    val home: Home,
-    val away: Away,
+    val league: League?,
+    val home: Home?,
+    val away: Away?,
     val score: String
-)
+){
+    override fun hashCode(): Int {
+        try {
+            return super.hashCode()
+        }catch (e: Exception){
+            return e.hashCode()
+        }
+    }
+}

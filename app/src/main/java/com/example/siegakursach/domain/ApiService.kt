@@ -28,7 +28,7 @@ interface ApiService {
         @Query("day") day: String
     ): Response<SportDay>
 
-    @GET("get.php?login=moiseenko&token=50103-7LWGEW20mZ2sDAN")
+    @GET("get.php?login=moiseenko&token=50103-7LWGEW20mZ2sDAN&p=1")
     suspend fun getEndDataEvents(
         @Query("task") task: String,
         @Query("sport") sport: String,

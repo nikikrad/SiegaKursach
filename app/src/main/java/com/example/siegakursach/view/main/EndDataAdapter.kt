@@ -12,14 +12,12 @@ import androidx.annotation.RequiresApi
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.siegakursach.R
-import com.example.siegakursach.domain.models.byday.GamesDay
-import com.example.siegakursach.view.game.model.EndData
 import com.example.siegakursach.view.game.model.GamesEnd
 import java.util.ArrayList
 import kotlin.streams.toList
 
 class EndDataAdapter(
-    private val movieList: Map<String, List<GamesEnd>>
+    private val movieList: Map<String?, List<GamesEnd>>
 ) : RecyclerView.Adapter<EndDataAdapter.MainViewHolder>() {
 
     companion object {
@@ -37,10 +35,12 @@ class EndDataAdapter(
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        holder.bind(
-            (movieList.keys.stream()).toList()[position],
-            (movieList.values.stream().toList()[position])
-        )
+        (movieList.keys.stream()).toList()[position]?.let {
+            holder.bind(
+                it,
+                (movieList.values.stream().toList()[position])
+            )
+        }
     }
 
     override fun getItemCount(): Int = movieList.size

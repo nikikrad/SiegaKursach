@@ -5,4 +5,12 @@ data class Home(
     val id: String,
     val image_id: String,
     val cc: String
-)
+){
+    override fun hashCode(): Int {
+        try {
+            return super.hashCode()
+        }catch (e: Exception){
+            return e.hashCode()
+        }
+    }
+}

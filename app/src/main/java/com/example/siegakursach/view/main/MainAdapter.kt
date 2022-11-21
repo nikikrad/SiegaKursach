@@ -13,11 +13,11 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.siegakursach.R
 import com.example.siegakursach.domain.models.byday.GamesDay
-import java.util.ArrayList
 import kotlin.streams.toList
 
+
 class MainAdapter(
-    private val movieList: Map<String, List<GamesDay>>
+    private val movieList: Map<String?, List<GamesDay>>
 ) : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
     companion object {
@@ -35,10 +35,12 @@ class MainAdapter(
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        holder.bind(
-            (movieList.keys.stream()).toList()[position],
-            (movieList.values.stream().toList()[position])
-        )
+        (movieList.keys.stream()).toList()[position]?.let {
+            holder.bind(
+                it,
+                (movieList.values.stream().toList()[position])
+            )
+        }
     }
 
     override fun getItemCount(): Int = movieList.size

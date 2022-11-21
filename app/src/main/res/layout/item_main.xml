@@ -9,6 +9,14 @@
         android:orientation="horizontal"
         android:layout_height="49dp">
 
+        <ImageView
+            android:id="@+id/iv_Country"
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            />
+
         <TextView
             android:id="@+id/tv_LeagueName"
             android:layout_width="wrap_content"

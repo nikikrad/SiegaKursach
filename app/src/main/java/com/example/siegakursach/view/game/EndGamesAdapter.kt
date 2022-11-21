@@ -57,8 +57,8 @@ class EndGamesAdapter(
 
             try {
 
-                homeTeam.text = item.home.name
-                awaiTeam.text = item.away.name
+                homeTeam.text = item.home!!.name
+                awaiTeam.text = item.away!!.name
                 val timestamp = Instant.ofEpochSecond(item.time.toLong())
                     .atZone(ZoneId.systemDefault())
                     .toLocalDateTime()
@@ -76,7 +76,7 @@ class EndGamesAdapter(
                 if (megastatus == false) {
                     megastatus = true
                     bundle.putInt("STATUS", 0)
-                    GameId.leagueId(item.league.id)
+                    GameId.leagueId(item.league!!.id!!)
                     GameId.gameId(item.game_id)
                     Navigation.findNavController(itemView)
                         .navigate(R.id.action_gameFragment_to_matchFragment, bundle)
