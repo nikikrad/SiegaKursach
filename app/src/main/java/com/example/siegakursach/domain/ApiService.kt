@@ -9,21 +9,31 @@ import com.example.siegakursach.domain.models.bygameid.MatchResult
 import com.example.siegakursach.view.game.match.tabslayout.coefficient.models.Coefficient
 import com.example.siegakursach.view.game.match.tabslayout.h2h.model.H2H
 import com.example.siegakursach.view.game.match.tabslayout.table.models.TableResponse
+import com.example.siegakursach.view.game.model.EndData
 import com.example.siegakursach.view.live.models.Live
 
 
 interface ApiService {
 
-    @GET("get.php?login=moiseenko&token=50103-7LWGEW20mZ2sDAN&task=pre&bookmaker=bet365")
-    suspend fun getSportEvents(
-        @Query("sport") sport: String
+    @GET("get.php?login=moiseenko&token=50103-7LWGEW20mZ2sDAN&task=enddata")
+    suspend fun getPastDay(
+        @Query("sport") sport: String,
+        @Query("day") data: String
     ): Response<SportEvents>
 
-    @GET("get.php?login=moiseenko&token=50103-7LWGEW20mZ2sDAN&task=predata")
+    @GET("get.php?login=moiseenko&token=50103-7LWGEW20mZ2sDAN")
     suspend fun getEventsByDay(
+        @Query("task") task: String,
         @Query("sport") sport: String,
         @Query("day") day: String
     ): Response<SportDay>
+
+    @GET("get.php?login=moiseenko&token=50103-7LWGEW20mZ2sDAN")
+    suspend fun getEndDataEvents(
+        @Query("task") task: String,
+        @Query("sport") sport: String,
+        @Query("day") day: String
+    ): Response<EndData>
 
     @GET("get.php?login=moiseenko&token=50103-7LWGEW20mZ2sDAN&task=eventdata")
     suspend fun getMatchById(

@@ -48,6 +48,9 @@ class LoginFragment: Fragment() {
         binding.btnRegistration.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
         }
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
     }
 
@@ -81,11 +84,13 @@ class LoginFragment: Fragment() {
             binding.etPassword.isVisible = false
             binding.btnLogIn.isVisible = false
             binding.tvErrorLabel.isVisible = false
+            binding.btnRegistration.isVisible = false
         } else {
             binding.tvSignInLabel.text = "Войдите в аккаунт"
             binding.etLogin.isVisible = true
             binding.etPassword.isVisible = true
             binding.btnLogIn.isVisible = true
+            binding.btnRegistration.isVisible = true
         }
     }
 }

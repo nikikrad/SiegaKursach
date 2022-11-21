@@ -87,6 +87,5 @@ dependencies {
 
     //for svg image
     implementation "com.squareup.okhttp3:okhttp:3.14.9"
-//    implementation "com.pixplicity.sharp:library:1.1.0"
-
+    implementation 'com.pixplicity.sharp:library:1.1.0'
 }

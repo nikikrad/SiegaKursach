@@ -19,7 +19,11 @@ import com.example.siegakursach.databinding.FragmentMainBinding
 import com.example.siegakursach.domain.models.byday.GamesDay
 import com.example.siegakursach.single.Day
 import com.example.siegakursach.single.SportType
+import com.example.siegakursach.single.TaskType
 import org.koin.android.ext.android.inject
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.*
 
 class MainFragment : Fragment() {
@@ -57,9 +61,9 @@ class MainFragment : Fragment() {
                 id: Long
             ) {
                 SportType.sportId = position.toString()
-                mainViewModel.getGameEvents(SportType.getSport(), "today")
+                mainViewModel.getGameEvents("predata",SportType.getSport(), "today")
                 binding.tvDate.text = "Сегодня"
-                adapter()
+                adapter(true)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -75,9 +79,34 @@ class MainFragment : Fragment() {
             val dpd = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                 Day.day = "${year}${month + 1}${dayOfMonth}"
                 binding.tvDate.text = "${dayOfMonth}.${month + 1}"
-                mainViewModel.getGameEvents(SportType.getSport(), Day.day)
-                binding.rvEvents.adapter = null
-                adapter()
+//                val currentTime =
+//                val qqq = currentTime
+//                val timestamp = Instant.ofEpochSecond(System.currentTimeMillis())
+//                    .atZone(ZoneId.systemDefault())
+//                    .toLocalDateTime()
+                val currentDate = LocalDateTime.now()
+//                val qqq = currentDate.monthValue
+
+                if ((currentDate.dayOfMonth.toInt() + currentDate.monthValue.toInt()) > (dayOfMonth.toInt() + (month+1).toInt())){
+                    mainViewModel.getGameEvents("enddata",SportType.getSport(), Day.day)
+                    TaskType.task = "enddata"
+                    binding.rvEvents.adapter = null
+                    adapter(false)
+                }else{
+                    mainViewModel.getGameEvents("predata",SportType.getSport(), Day.day)
+                    TaskType.task ="predata"
+                    binding.rvEvents.adapter = null
+                    adapter(true)
+                }
+
+//                if (timestamp.hour.toString().length == 1){
+//                    val hour =
+//                }else
+//                    time.text = "${timestamp.hour}:${timestamp.minute}"
+
+//                if((dayOfMonth + month) <= )
+//                binding.rvEvents.adapter = null
+
             }, year, month, day)
             dpd.show()
         }
@@ -85,21 +114,38 @@ class MainFragment : Fragment() {
 
     }
 
-    fun adapter() {
-        mainViewModel.liveData.observe(viewLifecycleOwner) { games ->
 
-            var shlyapa = games.games_pre.groupBy {
-                it.league.name
+    fun adapter(type: Boolean) {
+        if (type){
+            mainViewModel.liveData.observe(viewLifecycleOwner) { games ->
+                val shlyapa = games.games_pre.groupBy {
+                    it.league.name
+                }
+
+                val adapter = MainAdapter(shlyapa)
+                binding.rvEvents.layoutManager =
+                    LinearLayoutManager(
+                        activity?.applicationContext, LinearLayoutManager.VERTICAL, false
+                    )
+                binding.rvEvents.adapter = adapter
+
             }
+        }else{
+            mainViewModel.endData.observe(viewLifecycleOwner) { games ->
+                val shapulya = games.games_end.groupBy {
+                    it.league.name
+                }
 
-            val adapter = MainAdapter(shlyapa)
-            binding.rvEvents.layoutManager =
-                LinearLayoutManager(
-                    activity?.applicationContext, LinearLayoutManager.VERTICAL, false
-                )
-            binding.rvEvents.adapter = adapter
+                val adapter = EndDataAdapter(shapulya)
+                binding.rvEvents.layoutManager =
+                    LinearLayoutManager(
+                        activity?.applicationContext, LinearLayoutManager.VERTICAL, false
+                    )
+                binding.rvEvents.adapter = adapter
 
+            }
         }
+
     }
 
 }

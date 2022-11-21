@@ -41,6 +41,7 @@ class FavoriteFragment: Fragment() {
         }
         binding.ivLogout.setOnClickListener {
             auth.signOut()
+            binding.rvFavorite.adapter = null
             checkLoggedInState()
         }
     }
