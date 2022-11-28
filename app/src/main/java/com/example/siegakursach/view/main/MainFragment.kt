@@ -18,6 +18,7 @@ import com.example.siegakursach.single.Day
 import com.example.siegakursach.single.SportType
 import com.example.siegakursach.single.TaskType
 import org.koin.android.ext.android.inject
+import org.koin.core.component.getScopeId
 import java.time.LocalDateTime
 import java.util.*
 
