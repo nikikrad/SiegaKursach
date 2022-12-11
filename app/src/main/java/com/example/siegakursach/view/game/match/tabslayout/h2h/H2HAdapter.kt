@@ -56,23 +56,29 @@ class H2HAdapter(
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(item: H2HData) {
             megastatus = false
+            try{
 
-            homeTeam.text = item.home.name
-            awaiTeam.text = item.away.name
-            val timestamp = Instant.ofEpochSecond(item.time.toLong())
-                .atZone(ZoneId.systemDefault())
-                .toLocalDateTime()
-            if (timestamp.dayOfMonth.toString().length == 1 && timestamp.monthValue.toString().length == 1){
-                time.text = "0${timestamp.dayOfMonth}.0${timestamp.monthValue}"
-            }else if (timestamp.dayOfMonth.toString().length == 1 && timestamp.monthValue.toString().length == 2){
-                time.text = "0${timestamp.dayOfMonth}.${timestamp.monthValue}"
-            }else if (timestamp.dayOfMonth.toString().length == 2 && timestamp.monthValue.toString().length == 1){
-                time.text = "${timestamp.dayOfMonth}.0${timestamp.monthValue}"
-            }else
-                time.text = "${timestamp.dayOfMonth}.${timestamp.monthValue}"
+                homeTeam.text = item.home.name
+                awaiTeam.text = item.away.name
+                val timestamp = Instant.ofEpochSecond(item.time.toLong())
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDateTime()
+                if (timestamp.dayOfMonth.toString().length == 1 && timestamp.monthValue.toString().length == 1){
+                    time.text = "0${timestamp.dayOfMonth}.0${timestamp.monthValue}"
+                }else if (timestamp.dayOfMonth.toString().length == 1 && timestamp.monthValue.toString().length == 2){
+                    time.text = "0${timestamp.dayOfMonth}.${timestamp.monthValue}"
+                }else if (timestamp.dayOfMonth.toString().length == 2 && timestamp.monthValue.toString().length == 1){
+                    time.text = "${timestamp.dayOfMonth}.0${timestamp.monthValue}"
+                }else
+                    time.text = "${timestamp.dayOfMonth}.${timestamp.monthValue}"
 
-            homeScore.text = item.ss.toCharArray()[0].toString()
-            awayScore.text = item.ss.toCharArray()[2].toString()
+                try {
+                    homeScore.text = item.ss.toCharArray()[0].toString()
+                    awayScore.text = item.ss.toCharArray()[2].toString()
+                }catch (e: Exception){}
+            }catch (e: Exception){}
+
+
 
         }
     }

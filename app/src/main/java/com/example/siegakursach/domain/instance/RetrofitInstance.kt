@@ -7,7 +7,7 @@ internal class RetrofitInstance {
 
     companion object {
 
-        private const val URL = "https://spoyer.ru/api/"
+        private const val URL = "https://spoyer.com/api/"
 
         fun getRetrofitInstance(): Retrofit {
             return Retrofit.Builder()

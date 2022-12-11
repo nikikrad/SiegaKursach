@@ -30,9 +30,9 @@ class TableFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         if(Status.status.toInt() == 0){
-            tableViewModel.getMatch(GameId.gameId)
+            tableViewModel.getMatch(GameId.leagueId)
         }else
-            tableViewModel.getMatch(GameData.gameId)
+            tableViewModel.getMatch(GameData.leagueId)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

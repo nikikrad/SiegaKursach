@@ -49,7 +49,8 @@ class TableAdapter(
             megastatus = false
 //            i+=1
             nameTeam.text = item.team.name
-            number.text = (i++).toString()
+//            number.text = (i++).toString()
+            number.text = item.pos
 //            i += 1
             countGames.text = (item.draw.toInt() + item.loss.toInt() + item.win.toInt()).toString()
             points.text = item.points

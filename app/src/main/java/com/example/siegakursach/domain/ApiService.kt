@@ -15,47 +15,47 @@ import com.example.siegakursach.view.live.models.Live
 
 interface ApiService {
 
-    @GET("get.php?login=moiseenko&token=50103-7LWGEW20mZ2sDAN&task=enddata")
+    @GET("get.php?login=Verly&token=50103-7LWGEW20mZ2sDAN&task=enddata")
     suspend fun getPastDay(
         @Query("sport") sport: String,
         @Query("day") data: String
     ): Response<SportEvents>
 
-    @GET("get.php?login=moiseenko&token=50103-7LWGEW20mZ2sDAN")
+    @GET("get.php?login=Verly&token=31221-XPeWRDIYTkkbW1H")
     suspend fun getEventsByDay(
         @Query("task") task: String,
         @Query("sport") sport: String,
         @Query("day") day: String
     ): Response<SportDay>
 
-    @GET("get.php?login=moiseenko&token=50103-7LWGEW20mZ2sDAN&p=1")
+    @GET("get.php?login=Verly&token=31221-XPeWRDIYTkkbW1H&p=1")
     suspend fun getEndDataEvents(
         @Query("task") task: String,
         @Query("sport") sport: String,
         @Query("day") day: String
     ): Response<EndData>
 
-    @GET("get.php?login=moiseenko&token=50103-7LWGEW20mZ2sDAN&task=eventdata")
+    @GET("get.php?login=Verly&token=31221-XPeWRDIYTkkbW1H&task=eventdata")
     suspend fun getMatchById(
         @Query("game_id") id: String
     ): Response<MatchResult>
 
-    @GET("get.php?login=moiseenko&token=50103-7LWGEW20mZ2sDAN&task=h2h")
+    @GET("get.php?login=Verly&token=31221-XPeWRDIYTkkbW1H&task=h2h")
     suspend fun getH2HGames(
         @Query("game_id") id: String
     ): Response<H2H>
 
-    @GET("get.php?login=moiseenko&token=50103-7LWGEW20mZ2sDAN&task=tabledata")
+    @GET("get.php?login=Verly&token=31221-XPeWRDIYTkkbW1H&task=tabledata")
     suspend fun getTableByLeague(
         @Query("league") id: String
     ): Response<TableResponse>
 
-    @GET("get.php?login=moiseenko&token=50103-7LWGEW20mZ2sDAN&task=odds")
+    @GET("get.php?login=Verly&token=31221-XPeWRDIYTkkbW1H&task=odds")
     suspend fun getCoefficientsById(
         @Query("game_id") id: String
     ): Response<Coefficient>
 
-    @GET("get.php?login=moiseenko&token=50103-7LWGEW20mZ2sDAN&task=livedata")
+    @GET("get.php?login=Verly&token=31221-XPeWRDIYTkkbW1H&task=livedata")
     suspend fun getLiveMatches(
         @Query("sport") id: String
     ): Response<Live>

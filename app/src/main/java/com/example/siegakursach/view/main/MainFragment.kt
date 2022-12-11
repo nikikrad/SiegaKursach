@@ -81,7 +81,18 @@ class MainFragment : Fragment() {
                 val currentDate = LocalDateTime.now()
 
                 if ((currentDate.dayOfMonth.toInt() + currentDate.monthValue.toInt()) > (dayOfMonth.toInt() + (month+1).toInt())){
-                    mainViewModel.getGameEvents("enddatapage",SportType.getSport(), Day.day)
+                    if(Day.day.length == 7){
+                        val day = Day.day.toCharArray()
+                        val temp = day[6]
+                        var tempDay = ""
+                        day[6] = '0'
+                        day.forEach {
+                            tempDay += it.toString()
+                        }
+                        mainViewModel.getGameEvents("enddatapage",SportType.getSport(), "${tempDay + temp}")
+                    }else{
+                        mainViewModel.getGameEvents("enddatapage",SportType.getSport(), Day.day)
+                    }
                     TaskType.task = "enddata"
                     binding.rvEvents.adapter = null
                     adapter(false)

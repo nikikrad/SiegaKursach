@@ -80,8 +80,7 @@
                 <ImageView
                     android:id="@+id/iv_HomeTeam"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"/>
+                    android:layout_height="match_parent"/>
 
             </androidx.cardview.widget.CardView>
 
@@ -116,8 +115,7 @@
                 <ImageView
                     android:id="@+id/iv_AwayTeam"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"/>
+                    android:layout_height="match_parent"/>
 
             </androidx.cardview.widget.CardView>
 

@@ -73,91 +73,94 @@ class MatchFragment : Fragment() {
 
 //        responseBody.clear()
         matchViewModel.match.observe(viewLifecycleOwner) { match ->
+            try {
+
 
 //            Log.e("HUH", match.toString())
-            binding.tvLeagueName.text = match.results[0].league.name
-            binding.tvNameHomeTeam.text = match.results[0].home.name
-            binding.tvNameAwayTeam.text = match.results[0].away.name
+                binding.tvLeagueName.text = match.results[0].league.name
+                binding.tvNameHomeTeam.text = match.results[0].home.name
+                binding.tvNameAwayTeam.text = match.results[0].away.name
 
-            val timestamp = Instant.ofEpochSecond(match.results[0].time.toLong())
-                .atZone(ZoneId.systemDefault())
-                .toLocalDateTime()
+                val timestamp = Instant.ofEpochSecond(match.results[0].time.toLong())
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDateTime()
 
-            if(timestamp.minute.toString().length == 1){
-                binding.tvDate.text =
-                    "${timestamp.dayOfMonth}.${timestamp.monthValue}.${timestamp.year} ${timestamp.hour}:${timestamp.minute}0"
-            }else
-                binding.tvDate.text =
-                    "${timestamp.dayOfMonth}.${timestamp.monthValue}.${timestamp.year} ${timestamp.hour}:${timestamp.minute}"
+                if (timestamp.minute.toString().length == 1) {
+                    binding.tvDate.text =
+                        "${timestamp.dayOfMonth}.${timestamp.monthValue}.${timestamp.year} ${timestamp.hour}:${timestamp.minute}0"
+                } else
+                    binding.tvDate.text =
+                        "${timestamp.dayOfMonth}.${timestamp.monthValue}.${timestamp.year} ${timestamp.hour}:${timestamp.minute}"
 
 
 //            GameId.gameId = match.results[0].id
-            try {
-                Glide.with(binding.root)
-                    .load("https://spoyer.ru/api/team_img/${SportType.getSport()}/${match.results[0].home.image_id}.png")
-                    .placeholder(R.drawable.ic_search)
-                    .into(binding.ivHomeTeam)
-            } catch (e: Exception) {
-            }
-
-            try {
-                Glide.with(binding.root)
-                    .load("https://spoyer.ru/api/team_img/${SportType.getSport()}/${match.results[0].away.image_id}.png")
-                    .placeholder(R.drawable.ic_search)
-                    .into(binding.ivAwayTeam)
-            } catch (e: Exception) {
-            }
-
-            try {
-                binding.tvScore.text = match.results[0].ss
-
-            } catch (e: Exception) {
-            }
-
-
-            matchViewModel.processingData(match.results[0].id)
-
-            matchViewModel.status.observe(viewLifecycleOwner) {bool ->
-                if (bool){
-                    binding.btnFavorite.setImageResource(R.drawable.ic_white_fav)
-                }else{
-                    binding.btnFavorite.setImageResource(R.drawable.ic_white_unfav)
+                try {
+                    Glide.with(binding.root)
+                        .load("https://vitvesti.by/images/2020/06/17/ring.jpg")
+                        .placeholder(R.drawable.ic_search)
+                        .into(binding.ivHomeTeam)
+                } catch (e: Exception) {
                 }
-                binding.btnFavorite.setOnClickListener {
-                    if (auth.currentUser != null) {
-                        if (!bool) {
-                            database.child(
-                                auth.currentUser?.email.toString().substringBefore("@")
-                            )
-                                .child(match.results[0].id).setValue(
-                                    GameRequest(
-                                        match.results[0].id,
-                                        match.results[0].home.name,
-                                        match.results[0].away.name,
-                                        match.results[0].time
-                                    )
-                                ).addOnSuccessListener {
-                                    binding.btnFavorite.setImageResource(R.drawable.ic_white_fav)
-                                }.addOnFailureListener {
-                                    Log.e("HUH", it.localizedMessage)
-                                }
-                        } else {
-                            database.child(
-                                auth.currentUser?.email.toString().substringBefore("@")
-                            ).get()
-                                .addOnSuccessListener {
-                                    it.child(match.results[0].id).ref.removeValue()
-                                        .addOnSuccessListener {
-                                            binding.btnFavorite.setImageResource(R.drawable.ic_white_unfav)
-                                        }
-                                }
-                        }
 
+                try {
+                    Glide.with(binding.root)
+                        .load("https://vitvesti.by/images/2020/06/17/ring.jpg")
+                        .placeholder(R.drawable.ic_search)
+                        .into(binding.ivAwayTeam)
+                } catch (e: Exception) {
+                }
+
+                try {
+                    binding.tvScore.text = match.results[0].ss
+
+                } catch (e: Exception) {
+                }
+
+
+                matchViewModel.processingData(match.results[0].id)
+
+                matchViewModel.status.observe(viewLifecycleOwner) { bool ->
+                    if (bool) {
+                        binding.btnFavorite.setImageResource(R.drawable.ic_white_fav)
                     } else {
+                        binding.btnFavorite.setImageResource(R.drawable.ic_white_unfav)
+                    }
+                    binding.btnFavorite.setOnClickListener {
+                        if (auth.currentUser != null) {
+                            if (!bool) {
+                                database.child(
+                                    auth.currentUser?.email.toString().substringBefore("@")
+                                )
+                                    .child(match.results[0].id).setValue(
+                                        GameRequest(
+                                            match.results[0].id,
+                                            match.results[0].home.name,
+                                            match.results[0].away.name,
+                                            match.results[0].time
+                                        )
+                                    ).addOnSuccessListener {
+                                        binding.btnFavorite.setImageResource(R.drawable.ic_white_fav)
+                                    }.addOnFailureListener {
+                                        Log.e("HUH", it.localizedMessage)
+                                    }
+                            } else {
+                                database.child(
+                                    auth.currentUser?.email.toString().substringBefore("@")
+                                ).get()
+                                    .addOnSuccessListener {
+                                        it.child(match.results[0].id).ref.removeValue()
+                                            .addOnSuccessListener {
+                                                binding.btnFavorite.setImageResource(R.drawable.ic_white_unfav)
+                                            }
+                                    }
+                            }
+
+                        } else {
 //                        Toast.makeText(context, "Войдите в аккаунт!", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
-            }
+            }catch (e:Exception){}
 
         }
 

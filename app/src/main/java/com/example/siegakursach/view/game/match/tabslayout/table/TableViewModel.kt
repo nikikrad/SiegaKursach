@@ -18,7 +18,8 @@ class TableViewModel(private val tableRepository: TableRepository):ViewModel() {
     fun getMatch(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try{
-                liveData.postValue(tableRepository.getTable(id))
+                val qqq = liveData.postValue(tableRepository.getTable(id))
+                val www = qqq
             }catch (e:Exception){
                 Log.e("Error: ", e.toString())
             }

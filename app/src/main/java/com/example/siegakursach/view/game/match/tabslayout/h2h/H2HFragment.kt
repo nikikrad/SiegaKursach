@@ -42,12 +42,17 @@ class H2HFragment : Fragment() {
         h2HViewModel.liveData.observe(viewLifecycleOwner) { match ->
             Log.e("HUH", match.results.h2h.toString())
 
-            val adapter = H2HAdapter(match.results.home)
-            binding.rvH2H.layoutManager =
-                LinearLayoutManager(
-                    activity?.applicationContext, LinearLayoutManager.VERTICAL, false
-                )
-            binding.rvH2H.adapter = adapter
+            try{
+                val adapter = H2HAdapter(match.results.home)
+                binding.rvH2H.layoutManager =
+                    LinearLayoutManager(
+                        activity?.applicationContext, LinearLayoutManager.VERTICAL, false
+                    )
+                binding.rvH2H.adapter = adapter
+            }catch (e: Exception){
+
+            }
+
         }
     }
 }
